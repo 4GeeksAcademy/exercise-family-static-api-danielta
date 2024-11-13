@@ -45,13 +45,18 @@ def x():
 @app.route('/members/<int:member_id>', methods=['GET'])
 def y(member_id):
     member = jackson_family.get_member(member_id)
-    return jsonify(member), 200
+    if member:
+        return jsonify(member), 200
+    else:
+        return "Member ID not found", 404
 
 @app.route('/members/<int:member_id>', methods=['DELETE'])
 def z(member_id):
     member = jackson_family.delete_member(member_id)
     if member == None:
         return 400, "member ID does not exist"
+    elif jackson_family.get_member(member_id):
+        return 500, "member not deleted"
     else: 
         return jsonify(member), 200
 

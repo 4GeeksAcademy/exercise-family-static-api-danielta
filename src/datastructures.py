@@ -63,7 +63,7 @@ class FamilyStructure:
         for member in self._members:
             if member["id"] == id:
                 return member
-        return "member ID doesnt exist"
+        return None
     
 
     # this method is done, it returns a list with all the family members
